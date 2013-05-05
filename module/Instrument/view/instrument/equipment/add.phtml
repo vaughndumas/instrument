@@ -1,0 +1,58 @@
+<?php
+
+$title = 'Add new equipment';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<script>
+    function add_feature() {
+        var v_currentCount = $('form > fieldset > fieldset').length;
+        var v_template = $('form > fieldset > span').data('template');
+        v_template = v_template.replace(/__placeholder__/g, v_currentCount);
+        $('form > fieldset').append(v_template);
+        return false;
+    }
+</script>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('equipment', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+// New stuff starts
+$v_equipment = $form->get('equipment');
+?>
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadid')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iaddesc')); ?></div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadbld')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadloc')); ?></div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadinstype')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadcat')); ?></div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield"><?php echo "Active&nbsp;". $this->FormRadioTwb($form->get('iadactive'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true)); ?></div></td>
+        <td><div class="inputfield"><?php echo "Contact person ".$this->FormElementTwb($form->get('iadcontact'))." (Uni ID)"; ?></div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadnotes')); ?></div></td>
+        <td><div class="inputfield"><?php echo "Send booking email&nbsp;".$this->FormRadioTwb($form->get('iademailonbooking'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true)); ?></div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iadslots')); ?></div></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><?php echo $this->formSubmit($form->get('submit')); ?></td>
+        <td></td>
+    </tr>
+</table>
+<?php 
+echo $this->form()->closeTag();
+

@@ -1,0 +1,24 @@
+<?php
+
+$title = 'Delete category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title);?></h1>
+
+<p>Are you sure that you want to delete category
+    '<?php echo $this->escapeHtml($category->iabcode); ?>'&nbsp;:&nbsp;
+    '<?php echo $this->escapeHtml($category->iabdesc); ?>'?
+</p>
+<?php
+$url = $this->url('category', array(
+    'action' => 'delete',
+    'iabcode' => $this->iabcode,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="iabcode" value="<?php echo $category->iabcode; ?>" />
+        <input type="submit" name="del" value="Yes"/>
+        <input type="submit" name="del" value="No"/>
+    </div>
+</form>

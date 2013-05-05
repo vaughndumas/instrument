@@ -1,0 +1,23 @@
+<?php
+
+$title = 'Edit equipment type';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'equiptype',
+    array(
+        'action' => 'edit',
+        'iaccode' => $this->iaccode,
+    )
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('iaccode'));
+echo $this->formRow($form->get('iacdesc'));
+echo $this->formRow($form->get('iacactive'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

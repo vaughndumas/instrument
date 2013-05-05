@@ -1,0 +1,30 @@
+<?php
+
+$title = 'Add new equipment type';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('equiptype', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iaccode')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iacdesc')); ?></div></td>
+    </tr>
+    <tr class="datarow">
+        <td><div class="inputfield">Active &nbsp;<?php echo $this->FormRadioTwb($form->get('iacactive'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true)); ?></div></td>
+        <td></td>
+    </tr>
+    <tr class="datarow">
+        <td><?php echo $this->formSubmit($form->get('submit'));?></td>
+        <td></td>
+    </tr>
+
+<?php
+echo $this->form()->closeTag();

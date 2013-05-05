@@ -1,0 +1,41 @@
+<?php
+
+$title = 'Equipment';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('equipment', array('action'=>'add'));?>">Add new equipment</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Equipment Code</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Type</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($equipments as $equipment) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($equipment->iadid);?></td>
+        <td><?php echo $this->escapeHtml($equipment->iaddesc);?></td>
+        <td><?php echo $this->escapeHtml($equipment->iadcat);?></td>
+        <td><?php echo $this->escapeHtml($equipment->iadinstype);?></td>
+        <td>
+            <a href="<?php echo $this->url('equipment',
+                    array('action'=>'edit', 'iadid' => $equipment->iadid));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('equipment',
+                    array('action'=>'addefme', 'iadid' => $equipment->iadid));?>">Edit Features</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('equipment',
+                    array('action'=>'delete', 'iadid' => $equipment->iadid));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+
+</table>

@@ -1,0 +1,33 @@
+<?php
+
+$title = 'Equipment Types';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('equiptype', array('action'=>'add'));?>">Add a new equipment type</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Equipment Type</th>
+        <th>Description</th>
+        <th>Active</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($equiptypes as $equiptype) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($equiptype->iaccode);?></td>
+        <td><?php echo $this->escapeHtml($equiptype->iacdesc);?></td>
+        <td><?php echo $this->escapeHtml($equiptype->iacactive);?></td>
+        <td>
+            <a href="<?php echo $this->url('equiptype',
+                    array('action'=>'edit', 'iaccode' => $equiptype->iaccode));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('equiptype',
+                    array('action'=>'delete', 'iaccode' => $equiptype->iaccode));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,0 +1,39 @@
+<?php
+
+$title = 'Instrument Features';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('feature', array('action'=>'add'));?>">Add a new feature</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Instrument Code</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Cost</th>
+        <th>Default Run Time</th>
+        <th>Active Y/N</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($features as $feature) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($feature->ibacode);?></td>
+        <td><?php echo $this->escapeHtml($feature->ibadesc);?></td>
+        <td><?php echo $this->escapeHtml($feature->ibastartval);?></td>
+        <td><?php echo $this->escapeHtml($feature->ibacost);?></td>
+        <td><?php echo $this->escapeHtml($feature->ibafeatime);?></td>
+        <td><?php echo $this->escapeHtml($feature->ibaactive);?></td>
+        <td>
+            <a href="<?php echo $this->url('feature',
+                    array('action'=>'edit', 'ibacode' => $feature->ibacode));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('feature',
+                    array('action'=>'delete', 'ibacode' => $feature->ibacode));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,0 +1,18 @@
+<?php
+
+$title = 'Add new equipment feature';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('equipfeat', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('equipfeat')->get('ibbinsid'));
+echo $this->formRow($form->get('equipfeat')->get('ibbstartval'));
+echo "Active&nbsp;". $this->FormRadioTwb($form->get('equipfeat')->get('ibbactive'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true));
+echo $this->formCollection($form->get('equipfeat')->get('equipfeat'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

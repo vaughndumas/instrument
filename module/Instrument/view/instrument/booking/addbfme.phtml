@@ -1,0 +1,106 @@
+<?php
+
+$title = 'Maintain booking features';
+$this->headTitle($title);
+
+?>
+
+<script lang="text/javascript">
+    function showThis(x_this, x_chosen) {
+        var v_mychosen = eval(document.getElementById(x_chosen).value);
+        if (x_this.className == 'featurecell') {
+            x_this.className = 'featurecell_chosen';
+            v_mychosen = 1;
+            document.getElementById(x_chosen).value = v_mychosen;
+        }
+        else {
+            x_this.className = 'featurecell';
+            v_mychosen = 0;
+            document.getElementById(x_chosen).value = v_mychosen;
+        }
+    }
+</script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+
+$form = $this->form;
+// Get the individual fields
+$fs          = $form->get('bkmultibook');
+$v_bookingno = $fs->get('ibdbookno');
+$v_feacode   = $fs->get('ibdfeacode');
+$v_value     = $fs->get('ibdvalue');
+$v_cost      = $fs->get('ibdcost');
+$v_used      = $fs->get('ibdused');
+$v_insid     = $fs->get('ibdinsid');
+$v_datereq   = $fs->get('ibddatereq');
+$v_glc       = $fs->get('v_glc');
+
+// Interrogate the object to get the featureset
+$v_features   = $fs->get('availfeatures');
+$v_attr       = $v_features->getValue();
+$v_featureset = $v_attr['featureset'];
+
+$form->setAttribute('action', $this->url('booking', 
+                                         array('action' => 'exeaddbfme',
+                                               'ibdbookno' => $v_bookingno->getValue())));
+$form->prepare();
+?>
+<div id="topdiv" style=" width:'100%';height:'100px'">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="50%"><h2>Booking Number:  <span class="inputfield"><?php echo $v_bookingno->getValue()?></span></h2></td>
+            <td width="50%"><h2>Date Requested:  <span class="inputfield"><?php echo $v_datereq->getValue()?></span></h2></td>
+        </tr>
+        <tr>
+            <td width="50%"><h2>Equipment Code:  <span class="inputfield"><?php echo $v_insid->getValue()?></span></h2></td>
+            <td width="50%"><h2>GLC: <span class="inputfield"><?php echo $v_glc->getValue()?></span></h2></td>
+        </tr>
+    </table>
+</div>
+<?php
+echo $this->form()->openTag($form);
+echo $this->formHidden($v_bookingno);
+echo $this->formHidden($v_feacode);
+echo $this->formHidden($v_value);
+echo $this->formHidden($v_cost);
+echo $this->formHidden($v_used);
+
+?>
+<div id="maincontent" style="width:100%;height:100%">
+    <table cellspacing="0" cellpadding="4" border="0" width="100%">
+        <tr>
+<?php
+  $v_column_count = 0;
+  $v_max_columns = 3;
+  foreach ($v_featureset as $v_featurerec) {
+      if ($v_column_count % $v_max_columns == 0) {
+?>      </tr>
+        <tr>
+<?php
+      }
+?>
+            <td width="33%">
+                <div class="featurecell<?php if ($v_featurerec['chosen'] == 1) echo '_chosen'?>" style="width:100%; height:100%" onClick="showThis(this, 'chosen_<?php echo $v_column_count ?>');">
+                    <fieldset name="<?php echo $v_column_count?>">
+<input type="hidden" name="ibdbookno_<?php echo $v_column_count?>" value="<?php echo $v_bookingno->getValue(); ?>">
+                <input type="hidden" value="<?php echo $v_featurerec['ibbfeacode']?>" name="ibdfeacode_<?php echo $v_column_count?>">Feature: <?php echo $v_featurerec['ibbfeacode']?><br />
+                Feature Value: <input type="text" value="<?php echo $v_featurerec['ibbstartval']?>" name="ibdvalue_<?php echo $v_column_count?>">
+                <input id="chosen_<?php echo $v_column_count?>" type="hidden" name="chosen_<?php echo $v_column_count?>" value="<?php echo $v_featurerec['chosen'] ?>">
+                    </fieldset>
+                </div>
+            </td>
+<?php
+      $v_column_count = $v_column_count + 1;
+  }
+  echo "</tr>";
+?>
+   </table>
+
+<?php
+echo "&nbsp;".$this->formSubmit($form->get('submit'));
+echo '&nbsp;'.$this->formSubmit($form->get('cancel'));
+echo $this->form()->closeTag();
+?>
+    
+</div>

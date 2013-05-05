@@ -1,0 +1,38 @@
+<?php
+
+$title = 'Equipment Features';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('equipfeat', array('action'=>'add'));?>">Add new equipment feature</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Feature</th>
+        <th>Instrument</th>
+        <th>Amount</th>
+        <th>Active</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($equipfeats as $equipfeat) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($equipfeat->ibbfeacode);?></td>
+        <td><?php echo $this->escapeHtml($equipfeat->ibbinsid);?></td>
+        <td><?php echo $this->escapeHtml($equipfeat->ibbstartval);?></td>
+        <td><?php echo $this->escapeHtml($equipfeat->ibbactive);?></td>
+        <td>
+            <a href="<?php echo $this->url('equipfeat',
+                    array('action'=>'edit', 'ibbfeacode' => $equipfeat->ibbfeacode,
+                                            'ibbinsid' => $equipfeat->ibbinsid));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('equipfeat',
+                    array('action'=>'delete', 'ibbfeacode' => $equipfeat->ibbfeacode,
+                                              'ibbinsid' => $equipfeat->ibbinsid));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+
+</table>

@@ -1,0 +1,33 @@
+<?php
+
+$title = 'Add new feature';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('feature', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('ibacode')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('ibadesc')); ?></div></td>
+    </tr>
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('ibastartval')); ?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('ibacost')); ?></div></td>
+    </tr>
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('ibafeatime')); ?></div></td>
+        <td><div class="inputfield">Active?&nbsp;<?php echo $this->FormRadioTwb($form->get('ibaactive'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true)); ?></div></td>
+    </tr>
+    <tr class="datarow">
+        <td><?php echo $this->formSubmit($form->get('submit')); ?></td>
+        <td></td>
+    </tr>
+</table>
+<?php
+echo $this->form()->closeTag();

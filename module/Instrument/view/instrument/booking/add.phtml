@@ -1,0 +1,75 @@
+<?php
+
+$title = 'Add a booking';
+$this->headTitle($title);
+?>
+
+<script lang="text/javascript">
+    function showThis(x_this, x_chosen) {
+        var v_mychosen = eval(document.getElementById(x_chosen).value);
+        if (x_this.className == 'featurecell') {
+            x_this.className = 'featurecell_chosen';
+            v_mychosen = 1;
+            document.getElementById(x_chosen).value = v_mychosen;
+        }
+        else {
+            x_this.className = 'featurecell';
+            v_mychosen = 0;
+            document.getElementById(x_chosen).value = v_mychosen;
+        }
+    }
+</script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+
+$form = $this->form;
+
+$form->setAttribute('action', $this->url('booking', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form);
+
+?>
+
+<table border='0' cellspacing='1' cellpadding='0' width="100%">
+    <tr class="datarow">
+        <td width="15%"><div class="inputfield">Transaction Date</div></td>
+        <td width="20%"><div class="inputfield"><?php echo date('Y/m/d')?></div></td>
+        <td width="30%">&nbsp;</td>
+        <td width="15%">&nbsp;</td>
+        <td width="20%">&nbsp;</td>
+    </tr>
+    <tr class="datarow">
+        <td><div class="inputfield">User</div></td>
+        <!-- Remember to test this - will not necessarily work on my PC -->
+        <td><div class="inputfield"><?php if (isset($_SESSION['userName'])) { echo $_SESSION['userName']; } else echo $this->formElement($form->get('ibcunumber')); ?></div></td>
+        <td id="fld_user_name"><div class="inputfield">&nbsp;</div></td>
+        <td><div class="inputfield">Lab</div></td>
+        <td id="fld_user_lab"><div class="inputfield">&nbsp;</div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield" style="height: max-content">GLC</div></td>
+        <td><div class="inputfield"><?php echo $this->formElement($form->get('ibcglc')); ?></div></td>
+        <td style="text-align: right"><div class="inputfield">Date Required&nbsp;<?php echo $this->formDate($form->get('ibcdatereq')); ?></div></td>
+        <td><div class="inputfield">Start &nbsp; <?php echo $this->formTime($form->get('ibcstarttime'));?></div></td>
+        <td><div class="inputfield">End time&nbsp; <?php echo $this->formTime($form->get('ibcendtime')); ?></div></td>
+    </tr>
+    <tr>
+        <td colspan="3"><div class="inputfield">&nbsp;</div></td>
+        <td style="vertical-align: bottom"><div class="inputfield">Queue &nbsp;<?php echo $this->FormRadioTwb($form->get('ibcqueue'), \DluTwBootstrap\Form\FormUtil::FORM_TYPE_HORIZONTAL, array('inline'=>true)); ?></div></td>
+        <td><div class="inputfield">&nbsp;</div></td>
+    </tr>
+    <tr>
+        <td><div class="inputfield">Instrument</div></td>
+        <td colspan="2"><div class="inputfield"><?php echo $this->formSelect($form->get('ibcinsid'));?></div></td>
+        <td><div class="inputfield">Slot Number</div></td>
+        <td><div class="inputfield"><?php echo $this->formElement($form->get('ibcslot')); ?></div></td>
+    </tr>
+    <tr>
+        <td><?php echo "&nbsp;".$this->formSubmit($form->get('submit'));echo '&nbsp;'.$this->formSubmit($form->get('cancel'));?></td>
+        <td colspan="4"></td>
+    </tr>
+</table>
+<?php
+echo $this->form()->closeTag();
+?>

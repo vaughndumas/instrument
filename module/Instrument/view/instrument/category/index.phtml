@@ -1,0 +1,33 @@
+<?php
+
+$title = 'Instrument Categories';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('category', array('action'=>'add'));?>">Add a new category</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Category Code</th>
+        <th>Description</th>
+        <th>Colour</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($categories as $category) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($category->iabcode);?></td>
+        <td><?php echo $this->escapeHtml($category->iabdesc);?></td>
+        <td><?php echo $this->escapeHtml($category->iabcolour);?></td>
+        <td>
+            <a href="<?php echo $this->url('category',
+                    array('action'=>'edit', 'iabcode' => $category->iabcode));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('category',
+                    array('action'=>'delete', 'iabcode' => $category->iabcode));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

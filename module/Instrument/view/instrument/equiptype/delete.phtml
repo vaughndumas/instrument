@@ -1,0 +1,24 @@
+<?php
+
+$title = 'Delete equipment type';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title);?></h1>
+
+<p>Are you sure that you want to delete equipment type
+    '<em><?php echo $this->escapeHtml($equiptype->iaccode); ?></em>'&nbsp;:&nbsp;
+    '<em><?php echo $this->escapeHtml($equiptype->iacdesc); ?>'</em>?
+</p>
+<?php
+$url = $this->url('equiptype', array(
+    'action' => 'delete',
+    'iaccode' => $this->iaccode,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="iaccode" value="<?php echo $equiptype->iaccode; ?>" />
+        <input type="submit" name="del" value="Yes"/>
+        <input type="submit" name="del" value="No"/>
+    </div>
+</form>

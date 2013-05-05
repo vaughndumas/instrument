@@ -1,0 +1,49 @@
+<?php
+
+$title = 'Instrument Bookings';
+$this->headTitle($title);
+$form = $this->form;
+
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('booking', array('action'=>'add'));?>">Add a booking</a>
+</p>
+<table class="table">
+    <tr>
+        <th>User</th>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Queued?</th>
+        <th>Instrument</th>
+        <th>Slot</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($booking as $v_booking_row) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcunumber); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcdatereq); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcstarttime); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcendtime); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcqueue); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcinsid); ?></td>
+        <td><?php echo $this->escapeHtml($v_booking_row->ibcslot); ?></td>
+        <td>
+            <a href="<?php echo $this->url('booking',
+                    array('action'=>'edit', 'ibcbookno' => $v_booking_row->ibcbookno));?>">Edit</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('booking',
+                    array('action'=>'addbfme', 'ibcbookno' => $v_booking_row->ibcbookno));?>">Edit Features</a>
+        </td>
+        <td>
+            <a href="<?php echo $this->url('booking',
+                    array('action'=>'delete', 'ibcbookno' => $v_booking_row->ibcbookno));?>">Delete</a>
+        </td>
+
+    </tr>
+    <?php endforeach; ?>
+</table>

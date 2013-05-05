@@ -1,0 +1,31 @@
+<?php
+
+$title = 'Add new category';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('category', array('action' => 'add')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<table border="0" cellspacing="0" cellpadding="1" width="100%">
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iabcode'));?></div></td>
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iabdesc'));?></div></td>
+    </tr>
+    <tr class="datarow">
+        <td><div class="inputfield"><?php echo $this->formRow($form->get('iabcolour'));?></div></td>
+        <td></td>
+    </tr>
+    <tr class="datarow">
+        <td><?php echo $this->formSubmit($form->get('submit'));?></td>
+        <td></td>
+    </tr>
+</table>
+                
+<?php
+echo $this->form()->closeTag();

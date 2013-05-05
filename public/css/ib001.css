@@ -1,0 +1,88 @@
+#content{
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 10px;
+border: 1px solid black;
+background-color:#FFF;
+}
+
+.ins_select {
+    width: 60px;
+}
+
+#topdiv {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color:#FFF;
+    text-align: left;
+}
+#maincontent {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color:#FFF;
+}
+.featurecell {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid blue;
+    background-color:#FFF;
+    padding-left: 3px;
+}
+
+.featurecell_chosen {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid blue;
+    background-color: #cccccc;
+    padding-left: 3px;
+}
+
+#ins_select {
+    width: 400px;
+}
+
+#ins_starttime {
+    width: 80px;
+}
+
+#ins_endtime {
+    width: 80px;
+}
+
+#book_datereq {
+    width: 120px;
+}
+#book_slot {
+    width: 40px;
+}
+#book_unumber {
+    width: 70px;
+}
+#book_glc {
+    width:  70px;
+}
+.datarow {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 0px;
+}
+.inputfield {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 10px;
+    border: 1px solid #d5d5d5 ;
+    height: 100%;
+    vertical-align: central;
+    background-color: #ebebeb;
+    padding-left: 5px;
+}
+.datacell {
+    vertical-align: middle;
+}
